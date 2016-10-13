@@ -40,6 +40,9 @@ window.onload = function main()
 			});
 		}
 		
+		$status.innerHTML = "Good Luck!!!";
+		$status.style.color = "black";
+		
 		//Set boundaries to red if player moves the mouse outsied the box
 		//Only checked against the left and right of the maze since its not posibble for user to exit the maze through the top or bottom without first touching a boundary.
 		document.addEventListener("mouseover", function(){
