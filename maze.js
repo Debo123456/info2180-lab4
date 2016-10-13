@@ -6,6 +6,7 @@ window.onload = function main()
 	var $end = document.getElementById("end");
 	var $start = document.getElementById("start");	
 	var touchedWall = false;
+	var $status = document.getElementById("status");
 		
 		
 		for(var i = 0; i < $wall.length; i++)
@@ -33,11 +34,13 @@ window.onload = function main()
 		{
 			if(touchedWall === false)
 			{
-				alert("Succesful completion of maze");
+				$status.innerHTML = "Succesful completion of maze";
+				$status.style.color = "green";
 			}
 			else
 			{
-				alert("Unsuccesful, try again");
+				$status.innerHTML = "You lost, try again";
+				$status.style.color = "red";
 			}
 		});
 		
