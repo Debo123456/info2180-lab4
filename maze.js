@@ -6,6 +6,7 @@ window.onload = function main()
 	var $end = document.getElementById("end");
 	var $start = document.getElementById("start");	
 	var touchedWall = false;
+	var gameCompleted = false;
 	var $status = document.getElementById("status");
 	var $maze = document.getElementById("maze");
 	
@@ -17,11 +18,16 @@ window.onload = function main()
 		{		
 			$wall.item(i).setAttribute("class", "boundary youlose");
 		}
+		
+		$status.innerHTML = "You lost, try again";
+		$status.style.color = "red";
 	}
 	
 	//function for starting the game
 	var start = function(evt)
 	{
+		gameCompleted = false;
+		
 		//reset toucheWall flag to false 
 		touchedWall = false;
 		
@@ -36,7 +42,10 @@ window.onload = function main()
 		{
 			$wall.item(i).addEventListener("mouseover", function()
 			{
-				youLose($wall);
+				if(!gameCompleted)
+				{
+					youLose($wall);
+				}
 			});
 		}
 		
@@ -46,9 +55,12 @@ window.onload = function main()
 		//Set boundaries to red if player moves the mouse outsied the box
 		//Only checked against the left and right of the maze since its not posibble for user to exit the maze through the top or bottom without first touching a boundary.
 		document.addEventListener("mouseover", function(){
-			if(event.clientX < $maze.offsetLeft || event.clientX > $maze.offsetRight)
+			if(!gameCompleted)
 			{
-				youLose($wall);
+				if(event.clientX < $maze.offsetLeft || event.clientX > $maze.offsetRight)
+				{
+					youLose($wall);
+				}
 			}
 		});
 	}
@@ -60,11 +72,6 @@ window.onload = function main()
 		{
 			$status.innerHTML = "Succesful completion of maze";
 			$status.style.color = "green";
-		}
-		else
-		{
-			$status.innerHTML = "You lost, try again";
-			$status.style.color = "red";
 		}
 	}
 	
@@ -83,6 +90,7 @@ window.onload = function main()
 		$end.addEventListener("mouseover", function()
 		{
 			end();
+			gameCompleted = true;
 		});
 	}
 	
