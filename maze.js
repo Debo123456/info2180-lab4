@@ -1,14 +1,15 @@
 // JavaScript Document
 window.onload = function main()
 {
-	
+	//All required variable
 	var $wall = document.getElementsByClassName("boundary");
 	var $end = document.getElementById("end");
 	var $start = document.getElementById("start");	
 	var touchedWall = false;
 	var $status = document.getElementById("status");
 	var $maze = document.getElementById("maze");
-		
+	
+	//Change boundaries to red when mouse touches them, set touchedWall flag to 'true'	
 	var youLose = function($wall)
 	{
 		touchedWall = true;
@@ -18,15 +19,19 @@ window.onload = function main()
 		}
 	}
 	
+	//function for starting the game
 	var start = function(evt)
 	{
+		//reset toucheWall flag to false 
 		touchedWall = false;
-		console.log(touchedWall);
+		
+		//Reset boundaries to original color
 		for(var i = 0; i < $wall.length; i++)
 		{		
 			$wall.item(i).setAttribute("class", "boundary");
 		}
 		
+		//only allow boundaries to turn red on hover if "S" was clicked
 		for(var i = 0; i < $wall.length; i++)
 		{
 			$wall.item(i).addEventListener("mouseover", function()
@@ -35,6 +40,8 @@ window.onload = function main()
 			});
 		}
 		
+		//Set boundaries to red if player moves the mouse outsied the box
+		//Only checked against the left and right of the maze since its not posibble for user to exit the maze through the top or bottom without first touching a boundary.
 		document.addEventListener("mouseover", function(){
 			if(event.clientX < $maze.offsetLeft || event.clientX > $maze.offsetRight)
 			{
@@ -43,9 +50,9 @@ window.onload = function main()
 		});
 	}
 	
+	//Verified if the maze was completed or if user lost the game
 	var end = function()
 	{
-		console.log(touchedWall);
 		if(touchedWall == false)
 		{
 			$status.innerHTML = "Succesful completion of maze";
@@ -60,7 +67,7 @@ window.onload = function main()
 	
 	
 	
-	
+	//Implements functions to start and end the game
 	var game = function()
 	{
 		
@@ -76,6 +83,7 @@ window.onload = function main()
 		});
 	}
 	
+	//Initiates game function
 	game();
 }
 
