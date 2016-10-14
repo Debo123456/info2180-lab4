@@ -49,6 +49,12 @@ window.onload = function main()
 			});
 		}
 		
+		$end.addEventListener("mouseover", function()
+		{
+			end();
+			gameCompleted = true;
+		});
+		
 		$status.innerHTML = "Good Luck!!!";
 		$status.style.color = "black";
 		
@@ -87,11 +93,7 @@ window.onload = function main()
 			start();
 		});
 		
-		$end.addEventListener("mouseover", function()
-		{
-			end();
-			gameCompleted = true;
-		});
+		
 	}
 	
 	//Initiates game function
